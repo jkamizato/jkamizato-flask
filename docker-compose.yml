@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres
+    env_file:
+      - .env
+  web:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_DEBUG=1
+    ports:
+      - "8000:5000"
+    depends_on:
+      - db
+    env_file:
+      - .env
